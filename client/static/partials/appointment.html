@@ -1,0 +1,49 @@
+<div ng-controller="ApptController" class="container">
+
+
+	<div >
+		<ul class="nav navbar-nav ">
+			<li ><a href='' ng-click="logout()">Logout</a></li>
+		</ul>
+	</div>
+	<br>
+
+	<h3>Welcome, {{userName}}!</h4>
+	<br>
+
+	<h3>Doctor's Appointment</h3>
+	<div  class="col-md-8" >
+		<label>Search:</label>
+		<input type="text"  ng-model="filter_name" placeholder="search">
+	</div>
+
+	<br>
+	<div class="row">
+		<div class="col-md-2-offset-1" >
+			<table class="table table-bordered table-striped" >
+		        <thead>
+		          <tr>
+		            <td>Date</td>
+		            <td>Time</td>
+		            <td>Patient Name</td>
+		            <td>Complain</td>
+		          </tr>
+		        </thead>
+		        <tbody ng-repeat="appt in appts | orderBy:'date':reverse | filter: filter_name">
+
+		        	<tr>
+		        		<td>{{appt.date | date: 'MMMM d, y'}}</td>
+		        		<td>{{appt.time}}</td>
+		        		<td>{{appt.name}}</td>
+		        		<td>{{appt.complain}} <button ng-if="appt.name == userName" ng-click="DeleteAppt(appt)">Cancel</button></td>
+		        	</tr>
+
+		        </tbody>
+		    </table>
+		</div>
+	</div>
+	<div class="col-md-10-offset-1">
+		<button class="btn btn-primary" ng-click="addAppt()">Add New Appointment</button>
+	</div>
+
+</div>
